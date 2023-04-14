@@ -102,6 +102,7 @@ class Decorator
 
 class FieldDecorator extends Decorator
 {
+	public $f;
 	function __construct($fieldName, $default = null) {
 		$this->f = $fieldName;
 		if ($default !== null) $this->d = $default;
@@ -114,6 +115,8 @@ class FieldDecorator extends Decorator
 
 class ArrayMergeDecorator extends Decorator
 {
+	protected $m;
+	
 	function __construct($arrays) {
 		$this->m = $arrays;
 	}
@@ -173,6 +176,9 @@ class IfEmptyDecorator extends Decorator
 
 class UrlDecorator extends Decorator
 {
+	public $b;
+	public $q;
+
 	function __construct($base, $queryVars = null) {
 		$this->b = $base;
 		if ($queryVars !== null)

@@ -177,15 +177,15 @@
 		echo "\t<tr>\n\t\t<th class=\"data left required\">{$lang['strtemplatedb']}</th>\n";
 		echo "\t\t<td class=\"data1\">\n";
 		echo "\t\t\t<select name=\"formTemplate\">\n";
-		// Always offer template0 and template1 
+		// Always offer template0 and template1
 		echo "\t\t\t\t<option value=\"template0\"",
 			($_POST['formTemplate'] == 'template0') ? ' selected="selected"' : '', ">template0</option>\n";
 		echo "\t\t\t\t<option value=\"template1\"",
 			($_POST['formTemplate'] == 'template1') ? ' selected="selected"' : '', ">template1</option>\n";
 		while (!$templatedbs->EOF) {
 			$dbname = htmlspecialchars($templatedbs->fields['datname']);
-			if ($dbname != 'template1') { 
-				// filter out for $conf[show_system] users so we don't get duplicates 
+			if ($dbname != 'template1') {
+				// filter out for $conf[show_system] users so we don't get duplicates
 				echo "\t\t\t\t<option value=\"{$dbname}\"",
 					($dbname == $_POST['formTemplate']) ? ' selected="selected"' : '', ">{$dbname}</option>\n";
 			}
@@ -199,7 +199,7 @@
 		echo "\t\t<td class=\"data1\">\n";
 		echo "\t\t\t<select name=\"formEncoding\">\n";
 		echo "\t\t\t\t<option value=\"\"></option>\n";
-		while (list ($key) = each ($data->codemap)) {
+        foreach ($data->codemap as $key) {
 		    echo "\t\t\t\t<option value=\"", htmlspecialchars($key), "\"",
 				($key == $_POST['formEncoding']) ? ' selected="selected"' : '', ">",
 				$misc->printVal($key), "</option>\n";

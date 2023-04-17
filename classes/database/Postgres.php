@@ -1086,7 +1086,7 @@ class Postgres extends ADODB_base {
 		} else {
 			$sql = "SELECT c.relname, pg_catalog.pg_get_userbyid(c.relowner) AS relowner,
 						pg_catalog.obj_description(c.oid, 'pg_class') AS relcomment,
-						reltuples::bigint,
+						(CASE WHEN c.reltuples < 0 THEN NULL WHEN c.relpages = 0 THEN float8 '0' ELSE c.reltuples / c.relpages END * (pg_catalog.pg_relation_size(c.oid) / pg_catalog.current_setting('block_size')::int))::bigint as reltuples,
 						(SELECT spcname FROM pg_catalog.pg_tablespace pt WHERE pt.oid=c.reltablespace) AS tablespace
 					FROM pg_catalog.pg_class c
 					LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
